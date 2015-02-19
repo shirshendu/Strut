@@ -16,7 +16,10 @@
 }
 
 .slideSnapshot:hover .close-btn-red-20 {
-	display: inline;
+}
+
+.slideWell .addBtn.btn.btn-success {
+  display: none;
 }
 
 .slideSnapshot .badge {

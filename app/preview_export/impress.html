@@ -58,12 +58,41 @@
 <script src="scripts/loadPresentation.js"></script>
 <script>
 ready(function() {
+    var str = localStorage.aud
+    if(str) {
+      var strBuf = new ArrayBuffer(str.length);
+      var binAudio = new Uint8Array(strBuf);
+      for (var i=0; i<str.length; i++) {
+        binAudio[i] = str.charCodeAt(i);
+      }
+      binAudioBlob = new Blob([strBuf], {type: 'audio/mp3'});
+      var url = URL.createObjectURL(binAudioBlob);
+      var audio = new Audio(url);
+    }
+
     if (document.getElementById('launched-placeholder'))
         loadPresentation();
 
     if (!window.presStarted) {
         startPres(document, window);
-        impress().init();   
+        impress().init();
+        impress().goto(0,0);
+
+        // set box appearances
+        var textboxes = document.querySelectorAll('font[data-position]')
+        for (var i = 0; i < textboxes.length; i++) {
+          textboxes[i].style.display = 'none';
+          setTimeout(function(index) { return function(){ console.log('text'); textboxes[index].style.display = '' } }(i), textboxes[i].dataset.position * 1000);
+        };
+
+        //set slide transitions
+        var strut_data = JSON.parse(localStorage['strut-presentation-unnamed.strut']);
+        for (var i = 0; i < strut_data.slides.length; i++) {
+          setTimeout(function(){ impress().next() }, (strut_data.slides[i].end * 1000) - 300);
+        };
+
+        if(audio)
+          audio.play();
     }
 
     if ("ontouchstart" in document.documentElement) { 
