@@ -1,3 +1,9 @@
+Fork of the awesome Strut, for [KineType](https://github.com/shirshendu/kine_type)
+==
+Originally by tantaman, at [Strut](https://github.com/tantaman/Strut)
+
+----
+
 **Note:** I've been working on Strut2.0: https://github.com/tantaman/strut2
 
 Strut
