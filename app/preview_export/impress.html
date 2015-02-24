@@ -82,7 +82,7 @@ ready(function() {
         var textboxes = document.querySelectorAll('font[data-position]')
         for (var i = 0; i < textboxes.length; i++) {
           textboxes[i].style.display = 'none';
-          setTimeout(function(index) { return function(){ console.log('text'); textboxes[index].style.display = '' } }(i), textboxes[i].dataset.position * 1000);
+          setTimeout(function(index) { return function(){ textboxes[index].style.display = '' } }(i), textboxes[i].dataset.position * 1000);
         };
 
         //set slide transitions
